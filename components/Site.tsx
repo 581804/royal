@@ -1,20 +1,83 @@
 'use client';
-import {useState} from 'react'; import {ArrowRight,CalendarDays,ChevronDown,Heart,Instagram,Mail,MapPin,Menu,Search,ShieldCheck,Truck,UserRound,X,Diamond,Leaf,Coins} from 'lucide-react';
-const FALLBACK=[
-{name:'Ivory Royal Sherwani',category:'Sherwani',image:'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=85',description:'Hand-embroidered groom silhouettes'},
-{name:'Midnight Indo-Western',category:'Indo-Western',image:'https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=900&q=85',description:'Modern cuts, heritage detail'},
-{name:'Royal Blue Jodhpuri',category:'Jodhpuri',image:'https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=900&q=85',description:'Brocade bandhgala tailoring'},
-{name:'Crimson Bridal Lehenga',category:'Lehenga',image:'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85',description:'Bridal zardozi and zari work'},
-{name:'Champagne Reception Gown',category:'Gown',image:'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&q=85',description:'Reception couture with trains'}];
-export default function Site({products,categories}:{products:any[];categories:any[]}){const [menu,setMenu]=useState(false);const [email,setEmail]=useState('');const [sent,setSent]=useState(false);const items=products.length?products:FALLBACK;const cats=categories.length?categories:items.map(x=>({name:x.category,description:x.description}));
-return <main>
-<div className="announcement"><span>⌖ &nbsp; COMING SOON · UDAIPUR</span><span>BY THIS SEASON</span><span>✉ &nbsp; Join the Royal List &nbsp;|&nbsp; Get 10% Off</span></div>
-<header className="nav"><button className="mobileMenu" onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button><nav className={menu?'open':''}><a href="#home">Home</a><a href="#collections">Collections</a><a href="#how">How It Works</a><a href="#about">About Us</a><a href="#collections">Occasions</a><a href="#contact">Contact</a></nav><div className="logoBox"><img src="/logo.png" alt="The Royal Vastra"/><span>RENT · WEAR · CELEBRATE</span></div><div className="actions"><Search/><UserRound/><Heart/></div></header>
-<section id="home" className="hero"><div className="heroCopy"><p className="eyebrow">COMING SOON · UDAIPUR</p><h1>ROYAL WARDROBES,<br/><em>ON RENT</em></h1><p>Tradition for every occasion. Bridal lehengas, groom sherwanis and reception couture — reserved for your celebration, returned when the last song ends.</p><div className="heroBtns"><a className="btn primary" href="#collections">EXPLORE COLLECTIONS <ArrowRight size={17}/></a><a className="btn outline" href="#royal-list">JOIN THE ROYAL LIST</a></div></div><div className="heroVisual" style={{backgroundImage:`linear-gradient(90deg,#898884 0%,transparent 28%),linear-gradient(0deg,#25252255,transparent 55%),url(${items[3]?.image||FALLBACK[3].image})`}}><div className="visualBadge">TIMELESS<br/>TRADITIONS<br/>IN THE CITY<br/>OF LAKES<hr/>✦</div></div></section>
-<section className="benefits"><Benefit icon={<Diamond/>} title="PREMIUM COLLECTION"/><Benefit icon={<ShieldCheck/>} title="CLEAN & SANITISED"/><Benefit icon={<CalendarDays/>} title="FLEXIBLE RENTAL PERIODS"/><Benefit icon={<Truck/>} title="PAN INDIA DELIVERY"/><Benefit icon={<Heart/>} title="STYLIST SUPPORT"/></section>
-<section id="collections" className="collection section"><div className="sectionHead"><div><p className="eyebrow">THE COLLECTION</p><h2>Five Ways to Wear the Occasion</h2></div><a href="#collections">VIEW ALL COLLECTIONS <ArrowRight size={15}/></a></div><div className="cards">{cats.slice(0,5).map((c:any,i:number)=><article className="card" key={c.name}><img src={items[i%items.length].image} alt={c.name}/><div><h3>{c.name}</h3><p>{c.description||'Curated ethnic wear for your celebration'}</p><a href={`#${c.name.toLowerCase().replace(/\W/g,'-')}`}>EXPLORE <ArrowRight size={13}/></a></div></article>)}</div></section>
-<section id="about" className="why"><div className="whyIntro"><p className="eyebrow">WHY THE ROYAL VASTRA</p><h2>Heritage, Without<br/>the Price Tag</h2><p>Designer ethnic wear for life's special moments, without the long-term commitment.</p><a className="btn outline light" href="#royal-list">OUR STORY <ArrowRight size={16}/></a></div><div className="whyGrid"><BenefitBig icon={<Diamond/>} title="Premium Collection" text="Couture-grade craftsmanship, curated piece by piece."/><BenefitBig icon={<Coins/>} title="Cost-Effective Fashion" text="Wear designer for a fraction of the buying price."/><BenefitBig icon={<Leaf/>} title="Sustainable Choice" text="One outfit, many celebrations — far less waste."/><BenefitBig icon={<CalendarDays/>} title="For Every Occasion" text="Weddings, engagements, festivals and every function between."/></div></section>
-<section id="royal-list" className="early"><div className="lakeVisual" style={{backgroundImage:`linear-gradient(0deg,#25252288,transparent 65%),url(${items[0]?.image||FALLBACK[0].image})`}}><div><strong>SAME TRADITIONS<br/>NEW STORIES</strong><span>TRADITIONS TODAY · TOMORROW ALWAYS</span></div></div><div className="formPanel"><p className="eyebrow">EARLY ACCESS</p><h2>Join the Royal List</h2><p>Members receive a one-time 10% discount code for their first order.</p><form onSubmit={e=>{e.preventDefault();setSent(true)}}><input required placeholder="Full Name"/><input required type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="Email"/><input placeholder="+91  Mobile Number"/><select defaultValue=""><option value="" disabled>Select an occasion</option><option>Wedding</option><option>Engagement</option><option>Reception</option><option>Festival</option><option>Other</option></select><button className="btn primary" type="submit">{sent?'YOU’RE ON THE LIST':'CLAIM MY 10% CODE'} <ArrowRight size={16}/></button></form></div></section>
-<footer id="contact"><div className="footerBrand"><img src="/logo.png" alt="The Royal Vastra"/><p>Tradition for every occasion.</p></div><div><h4>QUICK LINKS</h4><a href="#home">Home</a><a href="#collections">Collections</a><a href="#how">How It Works</a><a href="#about">About Us</a><a href="#contact">Contact</a></div><div><h4>CONTACT</h4><p><MapPin size={15}/> Udaipur, Rajasthan</p><p><Mail size={15}/> sale@theroyalvastra.in</p><p>🌐 www.theroyalvastra.com</p></div><div><h4>FOLLOW US</h4><div className="social"><Instagram/><span>f</span><span>p</span><span>▶</span></div><p>TIMELESS ELEGANCE<br/>MODERN EXPERIENCES</p></div><div className="copyright">© 2026 The Royal Vastra. All rights reserved. <span>Privacy Policy &nbsp; | &nbsp; Terms & Conditions</span></div></footer>
-</main>}
-function Benefit({icon,title}:{icon:any;title:string}){return <div className="benefit">{icon}<span>{title}</span></div>}; function BenefitBig({icon,title,text}:{icon:any;title:string;text:string}){return <div className="bigBenefit">{icon}<div><h3>{title}</h3><p>{text}</p></div></div>}
+import { useState } from 'react';
+import { Instagram, Facebook, MapPin, Mail, Globe2, Crown, IndianRupee, Leaf, CalendarDays } from 'lucide-react';
+
+const FALLBACK = [
+  { name: 'Sherwani', image: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=1200&q=88', description: 'Hand-embroidered groom silhouettes' },
+  { name: 'Indo-Western', image: 'https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=1200&q=88', description: 'Modern cuts, heritage detail' },
+  { name: 'Jodhpuri', image: 'https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=1200&q=88', description: 'Brocade bandhgala tailoring' },
+  { name: 'Lehenga', image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=88', description: 'Bridal zardozi and zari work' },
+  { name: 'Gown', image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1400&q=88', description: 'Reception couture with trains' },
+];
+
+export default function Site({ products, categories }: { products: any[]; categories: any[] }) {
+  const [email, setEmail] = useState('');
+  const [sent, setSent] = useState(false);
+  const items = products.length ? products : FALLBACK;
+  const cats = categories.length ? categories.slice(0, 5).map((c: any, i: number) => ({ ...FALLBACK[i], ...c })) : FALLBACK;
+
+  return (
+    <main className="pdfSite">
+      <section className="heroPdf" id="home">
+        <div className="brandFrame"><img src="/logo.png" alt="The Royal Vastra" /></div>
+        <p className="eyebrow">COMING SOON · UDAIPUR</p>
+        <h1>ROYAL WARDROBES,<br />ON RENT</h1>
+        <p className="heroLead">Tradition for every occasion. Bridal lehengas, groom sherwanis and<br className="desktop" /> reception couture — reserved for your celebration, returned when the last<br className="desktop" /> song ends.</p>
+        <div className="seasonLine">BY THIS SEASON</div>
+      </section>
+
+      <section className="collectionPdf" id="collections">
+        <div className="sectionKicker">THE COLLECTION</div>
+        <h2>Five Ways to Wear the Occasion</h2>
+        <div className="thinRule" />
+        <div className="collectionGrid">
+          {cats.map((c: any, i: number) => (
+            <article className={`collectionCard ${i === 4 ? 'wide' : ''}`} key={c.name}>
+              <img src={items[i % items.length]?.image || FALLBACK[i].image} alt={c.name} />
+              <div className="collectionCaption"><h3>{c.name}</h3><p>{c.description || FALLBACK[i].description}</p></div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="whyPdf" id="about">
+        <div className="sectionKicker">WHY THE ROYAL VASTRA</div>
+        <h2>Heritage, Without the Price Tag</h2>
+        <div className="whyGridPdf">
+          <Why icon={<Crown />} title="Premium Collection" text="Couture-grade craftsmanship, curated piece by piece." />
+          <Why icon={<IndianRupee />} title="Cost-Effective Fashion" text="Wear designer for a fraction of the buying price." />
+          <Why icon={<Leaf />} title="Sustainable Choice" text="One outfit, many celebrations — far less waste." />
+          <Why icon={<CalendarDays />} title="For Every Occasion" text="Weddings, engagements, festivals and every function between." />
+        </div>
+      </section>
+
+      <section className="earlyPdf" id="royal-list">
+        <div className="sectionKicker">EARLY ACCESS</div>
+        <h2>Join the Royal List</h2>
+        <p>Members receive a one-time 10% discount code for their first order.</p>
+        <div className="joined">PEOPLE HAVE JOINED</div>
+        <form onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+          <label>Full Name<input required /></label>
+          <label>Email<input required type="email" value={email} onChange={e => setEmail(e.target.value)} /></label>
+          <label>Mobile Number<input /></label>
+          <label>Occasion<select defaultValue=""><option value="" disabled>Select an occasion</option><option>Wedding</option><option>Engagement</option><option>Reception</option><option>Festival</option></select></label>
+          <button type="submit">{sent ? 'YOU’RE ON THE LIST' : 'CLAIM MY 10% CODE'}</button>
+        </form>
+      </section>
+
+      <footer className="footerPdf" id="contact">
+        <div className="footerRule" />
+        <div className="footerGrid">
+          <div className="footerBrand"><img src="/logo.png" alt="The Royal Vastra" /><p>Tradition for every occasion.</p></div>
+          <div><div className="footerKicker">CONTACT</div><p><MapPin /> Udaipur, Rajasthan</p><p><Mail /> sale@theroyalvastra.in</p><p><Globe2 /> www.theroyalvastra.com</p></div>
+          <div><div className="footerKicker">FOLLOW</div><p><Instagram /> Instagram</p><p><Facebook /> Facebook</p></div>
+        </div>
+        <div className="copyright">© 2026 The Royal Vastra. All rights reserved.</div>
+      </footer>
+    </main>
+  );
+}
+
+function Why({ icon, title, text }: { icon: any; title: string; text: string }) {
+  return <div className="whyItem"><div className="whyIcon">{icon}</div><h3>{title}</h3><p>{text}</p></div>;
+}
