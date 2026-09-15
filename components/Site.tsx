@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { CalendarDays, ChevronRight, Coins, Facebook, Gem, Heart, Instagram, Leaf, Mail, MapPin, Search, ShieldCheck, Truck, UserRound, Youtube } from 'lucide-react';
 
 const IMG = {
@@ -23,6 +23,15 @@ const COLLECTIONS = [
 
 export default function Site() {
   const [sent, setSent] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   function submit(e: FormEvent<HTMLFormElement>) { e.preventDefault(); setSent(true); }
   return (
     <main className="rv-page">
@@ -30,7 +39,7 @@ export default function Site() {
         <div className="rv-top-left"><MapPin size={11} /><span>COMING SOON · UDAIPUR</span><b>|</b><span>BY THIS SEASON</span></div>
         <div className="rv-top-right"><Mail size={11} /><span>Join the Royal List</span><b>|</b><span>Get 10% Off</span></div>
       </div>
-      <header className="rv-header">
+      <header className={`rv-header${scrolled ? ' rv-header-scrolled' : ''}`}>
         <nav className="rv-nav rv-nav-left"><a className="active" href="#home">Home</a><a href="#collection">Collections</a><a href="#how">How It Works</a><a href="#about">About Us</a></nav>
         <a href="#home" className="rv-logo"><img src="/logo.png" alt="The Royal Vastra" /></a>
         <nav className="rv-nav rv-nav-right"><a href="#occasions">Occasions</a><a href="#blog">Blog</a><a href="#contact">Contact</a><Search/><UserRound/><Heart/></nav>
