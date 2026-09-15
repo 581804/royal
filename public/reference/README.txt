@@ -1,0 +1,1 @@
+Reference assets extracted from the supplied Royal Vastra launch PDF. These images are used by the landing page to match the supplied design.
