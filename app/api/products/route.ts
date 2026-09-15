@@ -1,0 +1,5 @@
+import {NextResponse} from 'next/server';
+import {connectDB} from '@/lib/db'; import {Product} from '@/models/Product'; import {isAdmin} from '@/lib/admin';
+export const dynamic='force-dynamic';
+export async function GET(req:Request){await connectDB(); const {searchParams}=new URL(req.url); const category=searchParams.get('category'); const featured=searchParams.get('featured'); const q:any={}; if(category)q.category=category;if(featured==='true')q.featured=true; return NextResponse.json(await Product.find(q).sort({sortOrder:1,createdAt:-1}).lean());}
+export async function POST(req:Request){if(!(await isAdmin()))return NextResponse.json({error:'Unauthorized'},{status:401}); await connectDB(); const body=await req.json(); if(!body.name||!body.category||!body.image)return NextResponse.json({error:'name, category and image are required'},{status:400}); body.slug=body.slug||body.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); return NextResponse.json(await Product.create(body),{status:201});}

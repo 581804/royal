@@ -1,0 +1,3 @@
+import {NextResponse} from 'next/server'; import {connectDB} from '@/lib/db'; import {Product} from '@/models/Product'; import {isAdmin} from '@/lib/admin';
+export async function PATCH(req:Request,{params}:{params:Promise<{id:string}>}){if(!(await isAdmin()))return NextResponse.json({error:'Unauthorized'},{status:401}); await connectDB(); const {id}=await params; return NextResponse.json(await Product.findByIdAndUpdate(id,await req.json(),{new:true}));}
+export async function DELETE(_:Request,{params}:{params:Promise<{id:string}>}){if(!(await isAdmin()))return NextResponse.json({error:'Unauthorized'},{status:401}); await connectDB(); const {id}=await params; await Product.findByIdAndDelete(id); return NextResponse.json({ok:true});}
