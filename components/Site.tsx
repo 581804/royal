@@ -26,17 +26,15 @@ export default function Site() {
   function submit(e: FormEvent<HTMLFormElement>) { e.preventDefault(); setSent(true); }
   return (
     <main className="rv-page">
-      <div className="rv-header-wrap">
-        <div className="rv-topbar">
-          <div className="rv-top-left"><MapPin size={11} /><span>COMING SOON · UDAIPUR</span><b>|</b><span>BY THIS SEASON</span></div>
-          <div className="rv-top-right"><Mail size={11} /><span>Join the Royal List</span><b>|</b><span>Get 10% Off</span></div>
-        </div>
-        <header className="rv-header">
-          <nav className="rv-nav rv-nav-left"><a className="active" href="#home">Home</a><a href="#collection">Collections</a><a href="#how">How It Works</a><a href="#about">About Us</a></nav>
-          <a href="#home" className="rv-logo"><img src="/logo.png" alt="The Royal Vastra" /></a>
-          <nav className="rv-nav rv-nav-right"><a href="#occasions">Occasions</a><a href="#blog">Blog</a><a href="#contact">Contact</a><Search/><UserRound/><Heart/></nav>
-        </header>
+      <div className="rv-topbar">
+        <div className="rv-top-left"><MapPin size={11} /><span>COMING SOON · UDAIPUR</span><b>|</b><span>BY THIS SEASON</span></div>
+        <div className="rv-top-right"><Mail size={11} /><span>Join the Royal List</span><b>|</b><span>Get 10% Off</span></div>
       </div>
+      <header className="rv-header">
+        <nav className="rv-nav rv-nav-left"><a className="active" href="#home">Home</a><a href="#collection">Collections</a><a href="#how">How It Works</a><a href="#about">About Us</a></nav>
+        <a href="#home" className="rv-logo"><img src="/logo.png" alt="The Royal Vastra" /></a>
+        <nav className="rv-nav rv-nav-right"><a href="#occasions">Occasions</a><a href="#blog">Blog</a><a href="#contact">Contact</a><Search/><UserRound/><Heart/></nav>
+      </header>
 
       <section id="home" className="rv-hero">
         <div className="rv-hero-copy"><div className="rv-kicker">C O M I N G &nbsp; S O O N &nbsp; · &nbsp; U D A I P U R</div><h1>ROYAL WARDROBES,<br /><span>ON RENT</span></h1><p>Tradition for every occasion. Bridal lehengas, groom<br className="desktop" /> sherwanis, and reception couture — reserved for your<br className="desktop" /> celebration, returned when the last song ends.</p><div className="rv-buttons"><a className="rv-btn primary" href="#collection">EXPLORE COLLECTIONS <ChevronRight /></a><a className="rv-btn ghost" href="#royal-list">JOIN THE ROYAL LIST</a></div></div>
