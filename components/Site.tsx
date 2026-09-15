@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
-import { CalendarDays, ChevronRight, Coins, Facebook, Gem, Heart, Instagram, Leaf, Mail, MapPin, Search, ShieldCheck, Truck, UserRound, Youtube } from 'lucide-react';
+import { CalendarDays, ChevronRight, Coins, Facebook, Gem, Heart, Instagram, Leaf, Mail, MapPin, Search, ShieldCheck, UserRound, Youtube } from 'lucide-react';
 
 const IMG = {
   sherwani: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=1000&q=92',
@@ -46,7 +46,7 @@ export default function Site() {
       <section id="home" className="rv-hero">
         <div className="rv-hero-copy"><div className="rv-kicker">C O M I N G &nbsp; S O O N &nbsp; · &nbsp; U D A I P U R</div><h1>ROYAL WARDROBES,<br /><span>ON RENT</span></h1><p>Tradition for every occasion. Bridal lehengas, groom<br className="desktop" /> sherwanis, and reception couture — reserved for your<br className="desktop" /> celebration, returned when the last song ends.</p><div className="rv-buttons"><a className="rv-btn primary" href="#collection">EXPLORE COLLECTIONS <ChevronRight /></a><a className="rv-btn ghost" href="#royal-list">JOIN THE ROYAL LIST</a></div></div>
         <div className="rv-hero-side">TIMELESS<br />TRADITIONS<br />IN THE CITY OF<br />LAKES<i /></div>
-        <section className="rv-benefits"><Benefit icon={<Gem />} text={'PREMIUM\nCOLLECTION'} /><Benefit icon={<ShieldCheck />} text="CLEAN & SANITISED" /><Benefit icon={<CalendarDays />} text={'FLEXIBLE\nRENTAL PERIODS'} /><Benefit icon={<Truck />} text={'PAN INDIA\nDELIVERY'} /><Benefit icon={<Heart />} text="STYLIST SUPPORT" /></section>
+        <section className="rv-benefits"><Benefit icon={<Gem />} text={'PREMIUM\nCOLLECTION'} /><Benefit icon={<ShieldCheck />} text="CLEAN & SANITISED" /><Benefit icon={<CalendarDays />} text={'FLEXIBLE\nRENTAL PERIODS'} /><Benefit icon={<Heart />} text="STYLIST SUPPORT" /></section>
       </section>
       <section id="collection" className="rv-collection"><div className="rv-section-head"><div><div className="rv-small-title">T H E &nbsp; C O L L E C T I O N</div><h2>Five Ways to Wear the Occasion</h2></div><a href="#collection">VIEW ALL COLLECTIONS <ChevronRight /></a></div><div className="rv-cards">{COLLECTIONS.map(([title, desc, image]) => <article className="rv-card" key={title}><img src={image} alt={title} /><div><h3>{title}</h3><p>{desc.split('\n').map((line, i) => <span key={i}>{line}<br /></span>)}</p><a href="#collection">EXPLORE <ChevronRight /></a></div></article>)}</div></section>
       <section id="about" className="rv-why"><div className="rv-why-dark"><div className="rv-small-title">W H Y &nbsp; T H E &nbsp; R O Y A L &nbsp; V A S T R A</div><h2>Heritage, Without<br />the Price Tag</h2><p>Designer ethnic wear for life's special moments,<br />without the long-term commitment.</p><a className="rv-btn ghost" href="#about">OUR STORY <ChevronRight /></a></div><div className="rv-why-grid"><Feature icon={<Gem />} title="Premium Collection" text="Couture-grade craftsmanship, curated piece by piece." /><Feature icon={<Coins />} title="Cost-Effective Fashion" text="Wear designer for a fraction of the buying price." /><Feature icon={<Leaf />} title="Sustainable Choice" text="One outfit, many celebrations – and far less waste." /><Feature icon={<CalendarDays />} title="For Every Occasion" text="Weddings, engagements, festivals and every function between." /></div></section>
