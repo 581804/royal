@@ -39,7 +39,7 @@ export default function Site() {
       </div>
       <header className={`rv-header${scrolled ? ' rv-header-scrolled' : ''}`}>
         <nav className="rv-nav rv-nav-left"><a className="active" href="#home">Home</a><a href="#collection">Collections</a><a href="#how">How It Works</a><a href="#about">About Us</a></nav>
-        <a href="#home" className="rv-logo"><img src="/logo.png" alt="The Royal Vastra" /></a>
+        <a href="#home" className="rv-logo"><span className="rv-logo-panel" aria-hidden="true" /><img src="/logo.png" alt="The Royal Vastra" /></a>
         <nav className="rv-nav rv-nav-right"><a href="#occasions">Occasions</a><a href="#blog">Blog</a><a href="#contact">Contact</a><Search/><UserRound/><Heart/></nav>
       </header>
 
