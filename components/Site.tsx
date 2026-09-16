@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
-import { CalendarDays, ChevronRight, Coins, Facebook, Gem, Heart, Instagram, Leaf, Mail, MapPin, Search, ShieldCheck, UserRound, Youtube } from 'lucide-react';
+import { CalendarDays, ChevronRight, Coins, Facebook, Gem, Heart, Instagram, Leaf, Mail, MapPin, Menu, Search, ShieldCheck, UserRound, Youtube } from 'lucide-react';
 
 const IMG = {
   sherwani: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=1000&q=92',
@@ -19,9 +19,13 @@ const COLLECTIONS = [
   ['GOWN', 'Reception couture\nwith trains', IMG.gown],
 ] as const;
 
+const NAV_LEFT = [['Home', '#home'], ['Collections', '#collection'], ['How It Works', '#how'], ['About Us', '#about']] as const;
+const NAV_RIGHT = [['Occasions', '#occasions'], ['Blog', '#blog'], ['Contact', '#contact']] as const;
+
 export default function Site() {
   const [sent, setSent] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -31,16 +35,57 @@ export default function Site() {
   }, []);
 
   function submit(e: FormEvent<HTMLFormElement>) { e.preventDefault(); setSent(true); }
+
+  const closeMobile = () => setMobileOpen(false);
+
   return (
     <main className="rv-page">
       <div className="rv-topbar">
         <div className="rv-top-left"><MapPin size={11} /><span>COMING SOON · UDAIPUR</span><b>|</b><span>BY THIS SEASON</span></div>
         <div className="rv-top-right"><Mail size={11} /><span>Join the Royal List</span><b>|</b><span>Get 10% Off</span></div>
       </div>
+
       <header className={`rv-header${scrolled ? ' rv-header-scrolled' : ''}`}>
-        <nav className="rv-nav rv-nav-left"><a className="active" href="#home">Home</a><a href="#collection">Collections</a><a href="#how">How It Works</a><a href="#about">About Us</a></nav>
-        <a href="#home" className="rv-logo"><img src="/logo.png" alt="The Royal Vastra" /></a>
-        <nav className="rv-nav rv-nav-right"><a href="#occasions">Occasions</a><a href="#blog">Blog</a><a href="#contact">Contact</a><Search/><UserRound/><Heart/></nav>
+        <div className="rv-nav-wrap rv-nav-wrap-left">
+          <nav className="rv-nav rv-nav-left" aria-label="Primary navigation">
+            {NAV_LEFT.map(([label, href], index) => <a key={label} className={index === 0 ? 'active' : ''} href={href}>{label}</a>)}
+          </nav>
+        </div>
+
+        <a href="#home" className="rv-logo" aria-label="The Royal Vastra home" onClick={closeMobile}>
+          <span className="rv-logo-panel" aria-hidden="true" />
+          <img src="/logo.png" alt="The Royal Vastra" />
+        </a>
+
+        <div className="rv-nav-wrap rv-nav-wrap-right">
+          <nav className="rv-nav rv-nav-right" aria-label="Secondary navigation">
+            {NAV_RIGHT.map(([label, href]) => <a key={label} href={href}>{label}</a>)}
+            <button className="rv-icon-btn" aria-label="Search" type="button"><Search /></button>
+            <button className="rv-icon-btn" aria-label="Account" type="button"><UserRound /></button>
+            <button className="rv-icon-btn" aria-label="Wishlist" type="button"><Heart /></button>
+          </nav>
+        </div>
+
+        <button
+          className="rv-mobile-menu-btn"
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileOpen}
+          type="button"
+          onClick={() => setMobileOpen(v => !v)}
+        >
+          <Menu />
+        </button>
+
+        {mobileOpen && (
+          <div className="rv-mobile-menu">
+            {[...NAV_LEFT, ...NAV_RIGHT].map(([label, href]) => <a key={label} href={href} onClick={closeMobile}>{label}</a>)}
+            <div className="rv-mobile-actions">
+              <button className="rv-icon-btn" aria-label="Search" type="button"><Search /></button>
+              <button className="rv-icon-btn" aria-label="Account" type="button"><UserRound /></button>
+              <button className="rv-icon-btn" aria-label="Wishlist" type="button"><Heart /></button>
+            </div>
+          </div>
+        )}
       </header>
 
       <section id="home" className="rv-hero">
